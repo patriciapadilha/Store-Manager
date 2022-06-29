@@ -2,6 +2,15 @@ const express = require('express');
 
 const app = express();
 
+require('dotenv').config();
+
+const router = require('./routers/index');
+
+app.use(express.json());
+
+app.use('/products', router.storeRouter);
+// app.use(errorMiddleware);
+
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.send();
