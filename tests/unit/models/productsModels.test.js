@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const productsModel = require('../../../models/productsModel');
 const connection = require('../../../models/connection');
 
-describe('Pesquisar todos os produtos', () => {
+describe('MODEL - Pesquisar todos os produtos', () => {
  
   before(async () => {
     const execute = [

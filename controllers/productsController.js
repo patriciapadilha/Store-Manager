@@ -7,7 +7,7 @@ const getAllProducts = async (req, res) => {
   //   throw new Error({ status: 400, message: 'Product not found' });
   // }
   console.log(results);
-  res.status(200).json(results);
+  res.status(200).send(results);
 };
 
 const getProductById = async (req, res) => {
@@ -15,9 +15,9 @@ const getProductById = async (req, res) => {
   const results = await productsService.getProductById(id);
   
   if (!results || results.length < 1) {
-    return res.status(404).json({ message: 'Product not found' });
+    return res.status(404).send({ message: 'Product not found' });
   }
-  res.status(200).json(results[0]);
+  res.status(200).send(results[0]);
 };
 
 module.exports = {
