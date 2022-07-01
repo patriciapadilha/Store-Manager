@@ -21,11 +21,11 @@ const getProductById = async (req, res) => {
 };
 
 const addNewProduct = async (req, res) => {
-    const { name, test } = req.body;
-    const result = await productsService.addNewProduct(name, test);
+    const { name } = req.body;
+    const result = await productsService.addNewProduct(name);
   
-    if (!result) {
-      return res.status(400).send('Dados inváalidos');
+    if (result.error) {
+      return res.status(result.error.code).json({ message: result.error.message });
     }
     res.status(201).send(result); 
 };
