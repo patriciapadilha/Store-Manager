@@ -5,7 +5,7 @@ const connection = require('../../../models/connection');
 
 describe('MODEL - Pesquisar todos os produtos', () => {
  
-  before(async () => {
+  before(() => {
     const execute = [
       {
         "id": 1,
@@ -24,7 +24,7 @@ describe('MODEL - Pesquisar todos os produtos', () => {
     sinon.stub(connection, 'execute').resolves(execute);
   });
 
-  after(async () => {
+  after(() => {
     connection.execute.restore();
   });
 

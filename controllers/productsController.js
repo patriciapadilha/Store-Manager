@@ -20,7 +20,18 @@ const getProductById = async (req, res) => {
   res.status(200).send(results[0]);
 };
 
+const addNewProduct = async (req, res) => {
+    const { name, test } = req.body;
+    const result = await productsService.addNewProduct(name, test);
+  
+    if (!result) {
+      return res.status(400).send('Dados inváalidos');
+    }
+    res.status(201).send(result); 
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
+  addNewProduct,
 };

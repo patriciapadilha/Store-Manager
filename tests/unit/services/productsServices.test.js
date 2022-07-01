@@ -49,7 +49,6 @@ describe('SERVICE - Testes da camada Service', () => {
 
     it('retorna um array de objetos', async () => {
       const response = await productsService.getAllProducts();
-      console.log(response);
       expect(response.length > 1).to.be.equal(true);
     });
   });
