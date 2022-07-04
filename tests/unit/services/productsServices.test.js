@@ -102,3 +102,72 @@ describe('SERVICE - Testes da camada Service', () => {
     });
   });
 });
+
+describe('Verifica função de adicionar um novo produto', () => {
+  describe('produto adicionado com sucesso', () => {
+    before(() => {
+      const results = {
+        "id": 3,
+        "name": "Escudo do Capitão América"
+      };
+      sinon.stub(productsModel, 'addNewProduct')
+        .resolves(results);
+    })
+
+    after(() => {
+      productsModel.addNewProduct.restore();
+    });
+
+    it('retorna um objeto', async () => {
+      const response = await productsService.addNewProduct(3);
+      expect(response).to.be.not.empty;
+      expect(response).to.be.a('object');
+      expect(response).to.have.a.property('id');
+      expect(response.id).to.be.equal(3);
+      expect(response).to.have.a.property('name');
+      expect(response.name).to.be.equal('Escudo do Capitão América');
+    });
+  });
+
+  describe('quando não encontrado', () => {
+    before(() => {
+      const results = [];
+      sinon.stub(productsModel, 'addNewProduct')
+        .resolves(results);
+    });
+
+    after(() => {
+      productsModel.addNewProduct.restore();
+    });
+
+    it('retorna um array vazio', async () => {
+      const response = await productsService.addNewProduct(4);
+      expect(response).to.be.an('array');
+      expect(response).to.be.empty;
+    });
+  });
+}); 
+
+describe('Verifica função de atualizar um produto', () => {
+  describe('produto adicionado com sucesso', () => {
+    before(async () => {
+      const execute = {
+        "id": 3,
+        "name": "Escudo do Capitão América"
+      };
+  
+      sinon.stub(productsModel, 'updateProduct').resolves(execute);
+    });
+  
+    after(async () => {
+      productsModel.updateProduct.restore();
+    });
+    
+    it('retorna um objeto com id e name', async () => {
+      const response = await productsModel.updateProduct(3);
+      console.log(response);
+      expect(response).to.have.a.property('id');
+      expect(response).to.have.a.property('name');
+    });
+  });
+});

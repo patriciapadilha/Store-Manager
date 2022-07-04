@@ -68,4 +68,50 @@ describe('Pesquisar produto por id', () => {
       expect(response).to.have.a.property('id');
     });
   });
-});  
+});
+
+describe('Verifica função de adicionar um novo produto', () => {
+  describe('produto adicionado com sucesso', () => {
+    before(async () => {
+      const execute = [{
+        "id": 3,
+        "name": "Escudo do Capitão América"
+      }];
+  
+      sinon.stub(connection, 'execute').resolves(execute);
+    });
+  
+    after(async () => {
+      connection.execute.restore();
+    });
+
+    it('retorna um objeto com id e name', async () => {
+      const response = await productsModel.addNewProduct(3);
+      expect(response).to.have.a.property('id');
+      expect(response).to.have.a.property('name');
+    });
+  });
+});
+
+describe('Verifica função de atualizar um produto', () => {
+  describe('produto adicionado com sucesso', () => {
+    before(async () => {
+      const execute = [{
+        "id": 3,
+        "name": "Escudo do Capitão América"
+      }];
+  
+      sinon.stub(connection, 'execute').resolves(execute);
+    });
+  
+    after(async () => {
+      connection.execute.restore();
+    });
+    
+    it('retorna um objeto com id e name', async () => {
+      const response = await productsModel.updateProduct(3);
+      expect(response).to.have.a.property('id');
+      expect(response).to.have.a.property('name');
+    });
+  });
+});

@@ -87,3 +87,55 @@ describe('CONTROLER - Testes da camada controller', () => {
     });
   });
 });
+
+describe('Verifica função de adicionar um novo produto', () => {
+  const response = {};
+  const request = {};
+
+  describe('produto adicionado com sucesso', () => {
+    before(() => {
+      request.params = { id: 1 };
+      request.body = { name: 'testes' };
+
+      response.status = sinon.stub().returns(response);
+      response.send = sinon.stub().returns();
+
+      sinon.stub(productsService, "addNewProduct").resolves(true);
+    });
+
+    after(() => {
+      productsService.addNewProduct.restore();
+    });
+
+    it("é chamado o status com o código 201", async () => {
+      await productsController.addNewProduct(request, response);
+      expect(response.status.calledWith(201)).to.be.equal(true);
+    });
+  });
+});
+
+describe('Verifica função de atualizar um produto', () => {
+  const response = {};
+  const request = {};
+
+  describe('produto atualizado com sucesso', () => {
+    before(() => {
+      request.params = { id: 1 };
+      request.body = { name: 'testes' };
+
+      response.status = sinon.stub().returns(response);
+      response.send = sinon.stub().returns();
+
+      sinon.stub(productsService, "updateProduct").resolves(true);
+    });
+
+    after(() => {
+      productsService.updateProduct.restore();
+    });
+    
+    it("é chamado o status com o código 200", async () => {
+      await productsController.updateProduct(request, response);
+      expect(response.status.calledWith(200)).to.be.equal(true);
+    });
+  });
+});
