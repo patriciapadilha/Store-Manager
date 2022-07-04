@@ -39,8 +39,26 @@ const addNewProduct = async (name) => {
   return result;
 };
 
+const updateProduct = async (id, name) => {
+  if (!name) return { error: { code: 400, message: '"name" is required' } };
+  
+  if (name.length < 5) {
+    return {
+      error: {
+        code: 422,
+        message: '"name" length must be at least 5 characters long',
+      },
+    };
+  }
+  
+  const result = await productsModel.updateProduct(id, name);
+  if (result.length === 0) return { error: { code: 404, message: 'Product not found' } };
+  return result;
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   addNewProduct,
+  updateProduct,
 };
