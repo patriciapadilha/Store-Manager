@@ -37,43 +37,20 @@ const addSaleProduct = async (newSales) => {
   }; 
 };
 
-const serializeGetAll = (sales) => {
-  const result = (sales.map(
-    ({ sale_id: saleId, date, product_id: productId, quantity }) => ({
-      saleId,
-      date,
-      productId,
-      quantity,
-    }),
-  ));
-  return result;
-};
-
 const getAllSales = async () => {
   const results = await salesModel.getAllSales();
 
   if (!results) return [];
 
-  return serializeGetAll(results);
-};
-
-const serializeGetById = (sales) => {
-  const result = (sales.map(
-    ({ date, product_id: productId, quantity }) => ({
-      date,
-      productId,
-      quantity,
-    }),
-  ));
-  return result;
+  return results;
 };
 
 const getSaleById = async (id) => {
-  const results = await salesModel.getSaleById(id);
+  const result = await salesModel.getSaleById(id);
 
-  if (!results) return [];
+  if (!result) return [];
 
-  return serializeGetById(results);
+  return result;
 };
 
 module.exports = {

@@ -23,7 +23,7 @@ const addSaleProduct = async (id, productId, quantity) => {
 
 const getAllSales = async () => {
   const [results] = await connection.execute(
-    `SELECT sale_id, date, product_id, quantity
+    `SELECT sale_id AS saleId, date, product_id AS productId, quantity
       FROM StoreManager.sales_products AS sales_products
       RIGHT JOIN StoreManager.sales AS sales
       ON sales.id = sales_products.sale_id
@@ -34,7 +34,7 @@ const getAllSales = async () => {
 
 const getSaleById = async (id) => {
   const [results] = await connection.execute(
-    `SELECT date, product_id, quantity
+    `SELECT date, product_id AS productId , quantity
       FROM StoreManager.sales_products AS sales_products
       RIGHT JOIN StoreManager.sales AS sales
       ON sales.id = sales_products.sale_id
