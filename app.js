@@ -9,6 +9,8 @@ const router = require('./routers/index');
 app.use(express.json());
 
 app.use('/products', router.storeRouter);
+app.use('/sales', router.salesRouter);
+
 // app.use(errorMiddleware);
 
 // não remova esse endpoint, é para o avaliador funcionar
